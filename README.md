@@ -1,10 +1,10 @@
 # project_reimbursement
 
-### A technical exercise
+## A technical exercise
 
 You have a set of projects, and you need to calculate a reimbursement amount for the set. Each project has a start date and an end date. The first day of a project and the last day of a project are always "travel" days. Days in the middle of a project are "full" days. There are also two types of cities a project can be in, high cost cities and low cost cities. 
 
-####A few rules:
+### A few rules:
 * First day and last day of a project, or sequence of projects, is a travel day.
 * Any day in the middle of a project, or sequence of projects, is considered a full day.
 * If there is a gap between projects, then the days on either side of that gap are travel days.
