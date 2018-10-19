@@ -26,10 +26,11 @@ module ProjectReimbursement
 
     def determine_travel_and_full_days
       project_days.each_with_index do |project_day, index|
+        # 1st and last days will always be travel days
         if index == 0 || index == project_days.size - 1
           project_day.travel = true
         else
-          if between_two_consecutive_days?(project_day, project_days[index - 1].date, project_days[index + 1].date)
+          if between_two_consecutive_days?(project_day.date, project_days[index - 1].date, project_days[index + 1].date)
             project_day.travel = false
           else
             project_day.travel = true
@@ -38,8 +39,8 @@ module ProjectReimbursement
       end
     end
 
-    def between_two_consecutive_days?(project_day, day_before, day_after)
-      (project_day.date - day_before).to_i == 1 && (day_after - project_day.date).to_i == 1
+    def between_two_consecutive_days?(checked_date, date_before, date_after)
+      (checked_date.prev_day === date_before) && (checked_date.next_day === date_after)
     end
 
     def reimbursement(project_day)
