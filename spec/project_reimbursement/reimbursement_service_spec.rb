@@ -14,8 +14,8 @@ module ProjectReimbursement
               Project.new(Date.new(2015, 9, 1), Date.new(2015, 9, 3), false)
           ]
 
-          # service = ReimbursementService.new(projects)
-          # expect(service.execute).to eq(165)
+          service = ReimbursementService.new(projects)
+          expect(service.execute).to eq(165)
         end
       end
 
