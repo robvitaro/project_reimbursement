@@ -34,16 +34,18 @@ module ProjectReimbursement
         if days.size == 1
           scrubbed_days << days[0]
         else
-          high_cost_days = days.select{|day| day.high_cost }
-          if high_cost_days.size.zero?         # if they're all lowcost days
-            scrubbed_days << days[0]           # just take the first
-          else                                 # otherwise
-            scrubbed_days << high_cost_days[0] # take the first highcost day
-          end
+          scrubbed_days << pick_day_with_most_reimbursement(days)
         end
       end
 
-      scrubbed_days.flatten.sort_by(&:date)
+      scrubbed_days.sort_by(&:date)
+    end
+
+    def pick_day_with_most_reimbursement(days)
+      high_cost_days = days.select{|day| day.high_cost }
+
+      # if they're all lowcost days just take the first from days given; otherwise take the first highcost day
+      high_cost_days.size.zero? ? days[0] : high_cost_days[0]
     end
 
     def determine_travel_and_full_days
