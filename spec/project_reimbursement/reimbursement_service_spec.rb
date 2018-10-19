@@ -28,8 +28,8 @@ module ProjectReimbursement
               Project.new(Date.new(2015, 9, 6), Date.new(2015, 9, 8), false)
           ]
 
-          # service = ReimbursementService.new(projects)
-          # expect(service.execute).to eq(590)
+          service = ReimbursementService.new(projects)
+          expect(service.execute).to eq(590)
         end
       end
 
@@ -57,8 +57,8 @@ module ProjectReimbursement
               Project.new(Date.new(2015, 9, 2), Date.new(2015, 9, 3), true)
           ]
 
-          # service = ReimbursementService.new(projects)
-          # expect(service.execute).to eq(185)
+          service = ReimbursementService.new(projects)
+          expect(service.execute).to eq(185)
         end
       end
     end

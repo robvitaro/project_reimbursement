@@ -14,14 +14,36 @@ module ProjectReimbursement
 
     def execute
       determine_travel_and_full_days
-      # throw out same days, keep higher
       project_days.reduce(0) { |sum, project_day| sum + reimbursement(project_day) }
     end
 
     private
 
     def project_days
-      @project_days ||= @projects.map(&:project_days).flatten.sort_by(&:date)
+      @project_days ||= sorted_and_scrubbed_project_days
+    end
+
+    def sorted_and_scrubbed_project_days
+      all_days = @projects.map(&:project_days).flatten
+
+      groups = all_days.group_by{|project_day| project_day.date}
+
+      # take only 1 ProjectDay per date, preference to highcost days over lowcost days
+      scrubbed_days = []
+      groups.each do |date, days|
+        if days.size == 1
+          scrubbed_days << days[0]
+        else
+          high_cost_days = days.select{|day| day.high_cost }
+          if high_cost_days.size.zero?         # if they're all lowcost days
+            scrubbed_days << days[0]           # just take the first
+          else                                 # otherwise
+            scrubbed_days << high_cost_days[0] # take the first highcost day
+          end
+        end
+      end
+
+      scrubbed_days.flatten.sort_by(&:date)
     end
 
     def determine_travel_and_full_days
