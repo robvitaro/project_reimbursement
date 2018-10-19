@@ -35,3 +35,7 @@ Given the following sets of projects, provide code which will calculate the reim
 * Project 2: Low Cost City Start Date: 9/1/15 End Date: 9/1/15
 * Project 3: High Cost City Start Date: 9/2/15 End Date: 9/2/15
 * Project 4: High Cost City Start Date: 9/2/15 End Date: 9/3/15
+
+### Visual representation
+See [spreadsheet](https://docs.google.com/spreadsheets/d/1Nb_HQgMixwswYgCK5YYUr4xqrMZBaooaGZ499jHuyD8/edit?usp=sharing)
+for another way to look at the above 4 sets
